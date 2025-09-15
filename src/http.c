@@ -25,6 +25,7 @@ int http_curl(City_t *city_array, uint8_t *cc) {
     }
     
     curl_easy_cleanup(curl);
-
+    /* Reset City Counter in main */
+    *cc = 16;
     return EXIT_SUCCESS;
 }

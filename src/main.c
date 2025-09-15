@@ -11,6 +11,7 @@
 #include "user.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 int main() {
     City_t city_array[16];
@@ -18,18 +19,27 @@ int main() {
     
     /* Pass arrays by name; they automatically convert to pointers to their first element.
        The '&' operator is only needed for passing individual variables by reference. */
-    parse_city_into_array(city_array, city_list, &cc);
-    parse_print_city(city_array, &cc);
 
-    printf("Please select a city from the list: ");
-    user_get_input(city_array, &cc);
-    printf("City selected: %s\n", city_array[cc].city_name);
-    printf("City URL: %s\n", city_array[cc].city_url);
+    parse_city_into_array(city_array, city_list, &cc);
     
-    printf("API respons: \n\n");
-    http_curl(city_array, &cc);
-    printf("\n\n");
+	
+    while (1) {
+	
+	parse_print_city(city_array, &cc);
+	printf("Please select a city from the list (`q` to quit): ");
+	user_get_input(city_array, &cc);
+	/* Setting cc to 0 if city not found in list, send user to top */ 
+	if (cc == 0) {
+	    continue;
+	}
+	printf("City selected: %s\n", city_array[cc].city_name);
+	printf("City URL: %s\n", city_array[cc].city_url);
     
-    return 0;
+	printf("API respons: \n\n");
+	http_curl(city_array, &cc);
+	printf("\n\n");
+    }
+    
+    return EXIT_SUCCESS;
     
 }

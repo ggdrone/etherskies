@@ -20,6 +20,10 @@ int user_get_input(City_t *city_array, uint8_t *cc) {
 	buf[strcspn(buf, "\n")] = '\0';
 
     }
+    
+    if (strcmp(buf, "q") == 0) {
+	exit(EXIT_SUCCESS);
+    }
 
     /* Hardcoded size of city_array here,
        not great for future */
@@ -32,7 +36,7 @@ int user_get_input(City_t *city_array, uint8_t *cc) {
 	}
 
     }
-
+    *cc = 0;
     printf("No such city in database!\n");
     return EXIT_FAILURE;
 }
