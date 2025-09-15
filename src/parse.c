@@ -52,9 +52,11 @@ void parse_city_into_array(City_t *city_array, const char *city_list, uint8_t *c
 
 /* Helper function, print all city names */
 void parse_print_city(City_t *city_array, uint8_t *cc) {
+
     uint8_t i;
     for (i = 0; i < *cc; i++) {
-	printf("| %-20s | %s\n", city_array[i].city_name, city_array[i].city_url);
-
+	/* It is wide */
+	printf("%-10s\n", city_array[i].city_name);
     }
+    
 }

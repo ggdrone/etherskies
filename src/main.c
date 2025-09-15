@@ -6,13 +6,11 @@
        4. TODO: return to top
     */
 
-
 #include "parse.h"
 #include "http.h"
 #include "user.h"
 #include <stdio.h>
 #include <stdint.h>
-
 
 int main() {
     City_t city_array[16];
@@ -25,9 +23,12 @@ int main() {
 
     printf("Please select a city from the list: ");
     user_get_input(city_array, &cc);
-
+    printf("City selected: %s\n", city_array[cc].city_name);
+    printf("City URL: %s\n", city_array[cc].city_url);
+    
     printf("API respons: \n\n");
     http_curl(city_array, &cc);
+    printf("\n\n");
     
     return 0;
     
