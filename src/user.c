@@ -1,3 +1,4 @@
+// user.c
 #include "user.h"
 #include "parse.h"
 #include <stdio.h>
@@ -7,7 +8,7 @@
 /* Gets user input and tries to find input in city_array.
    Function effectivly increments cc to correct value for
    user input */
-int user_get_input(City_t *city_array) {
+int user_get_input(parse_city_t *city_array) {
 
     char buf[32];
     uint8_t i;

@@ -1,7 +1,7 @@
 # --- Compiler and flags ---
-CC      = gcc                             	 	 # The C compiler to use
+CC      = gcc # The C compiler to use
 LIBS	= -lcurl -ljansson
-CFLAGS  = -Wall -Wextra -Werror -Iinclude -MMD -MP	 # Compiler flags:
+CFLAGS  = -Wall -Wextra -Iinclude -MMD -MP # Compiler flags: removed -Werror
 						 	 # -Wall   = enable common warnings
 						 	 # -Wextra = enable extra warnings
 						 	 # -Werror = treat warnings as errors
@@ -27,6 +27,7 @@ all: $(TARGET)
 # --- Link rule: link object files into the final program ---
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	tree
 # $@ = the target name (here: "program")
 # $^ = all prerequisites (here: all .o files)
 # This compiles the final binary from all object files.
@@ -47,6 +48,7 @@ $(OUTDIR):
 # --- Cleanup rule: remove generated files ---
 clean:
 	rm -rf $(OUTDIR) $(TARGET)
+	tree
 # -rf = recursive, force
 # This deletes the build/ directory and the final program
 

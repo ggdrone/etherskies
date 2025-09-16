@@ -1,3 +1,4 @@
+// parse.c
 #include "parse.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -21,7 +22,7 @@ const char* city_list =
     "Luleå:65.5848:22.1567\n"
     "Kiruna:67.8558:20.2253\n";
 
-void parse_city_into_array(City_t *city_array, const char *city_list, int short *cc) {
+void parse_city_into_array(parse_city_t *city_array, const char *city_list, short int *cc) {
 
     /* Keeping track of numbers of chars read
        And our current poisition in the string */
@@ -51,12 +52,12 @@ void parse_city_into_array(City_t *city_array, const char *city_list, int short 
 }
 
 /* Helper function, print all city names */
-void parse_print_city(City_t *city_array) {
+void parse_print_city(parse_city_t *city_array) {
 
     uint8_t i;
     for (i = 0; i < MAX_CITY_ARRAY; i++) {
 	/* It is wide */
-	printf("%-10s\n", city_array[i].city_name);
+	printf(" | %-15s |\n", city_array[i].city_name);
     }
     
 }
