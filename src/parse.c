@@ -21,7 +21,7 @@ const char* city_list =
     "Luleå:65.5848:22.1567\n"
     "Kiruna:67.8558:20.2253\n";
 
-void parse_city_into_array(City_t *city_array, const char *city_list, uint8_t *cc) {
+void parse_city_into_array(City_t *city_array, const char *city_list, int short *cc) {
 
     /* Keeping track of numbers of chars read
        And our current poisition in the string */
@@ -51,10 +51,10 @@ void parse_city_into_array(City_t *city_array, const char *city_list, uint8_t *c
 }
 
 /* Helper function, print all city names */
-void parse_print_city(City_t *city_array, uint8_t *cc) {
+void parse_print_city(City_t *city_array) {
 
     uint8_t i;
-    for (i = 0; i < *cc; i++) {
+    for (i = 0; i < MAX_CITY_ARRAY; i++) {
 	/* It is wide */
 	printf("%-10s\n", city_array[i].city_name);
     }

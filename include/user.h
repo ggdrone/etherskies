@@ -4,6 +4,6 @@
 #include "parse.h"
 #include <stdint.h>
 
-int user_get_input(City_t *city_array, uint8_t *cc);
+int user_get_input(City_t *city_array);
 
 #endif
