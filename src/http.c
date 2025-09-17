@@ -5,7 +5,7 @@
 #include "http.h"
 #include "parse.h"
 
-int http_curl(City_t *city_array) {
+int http_curl(City_t *city_array, int city) {
 
     CURL *curl = curl_easy_init();
     if (!curl) {
@@ -13,7 +13,7 @@ int http_curl(City_t *city_array) {
 	return EXIT_FAILURE;
     }
 
-    curl_easy_setopt(curl, CURLOPT_URL, city_array[1].city_url);
+    curl_easy_setopt(curl, CURLOPT_URL, city_array[city].city_url);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L); // Follow redirects
 
     CURLcode res = curl_easy_perform(curl);
