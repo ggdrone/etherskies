@@ -11,7 +11,8 @@ typedef struct http_membuf_t {
 } http_membuf_t;
 
 size_t http_write_data(void *buffer, size_t size, size_t nmemb, void *userp);
-int http_curl(parse_city_t *city_array, short int *cc, char **curl_buf, size_t *curl_buf_len);
+int http_curl(parse_city_t *city_array, short int *user_choice, char **curl_buf, size_t *curl_buf_len);
+void http_free_and_clear(char **curl_buf, size_t *curl_buf_len);
 
 
 #endif

@@ -21,7 +21,7 @@
 size_t http_write_data(void *buffer, size_t size, size_t nmemb, void *userp) { 
     /* Call back function */
     size_t bytes = size * nmemb; 
-    printf("Recived chunk: %zu bytes\n", bytes);
+    printf("\n\tRecived chunk: %zu bytes\n", bytes);
 
     /* We grow the buffer with this size! */
     struct http_membuf_t* mem_t = userp;
@@ -44,7 +44,7 @@ size_t http_write_data(void *buffer, size_t size, size_t nmemb, void *userp) {
     return bytes;    
 }
 
-int http_curl(parse_city_t *city_array, short int *cc, char **curl_buf, size_t *curl_buf_len) {
+int http_curl(parse_city_t *city_array, short int *user_choice, char **curl_buf, size_t *curl_buf_len) {
 
     CURL *curl = curl_easy_init();
     if (!curl) {
@@ -54,7 +54,7 @@ int http_curl(parse_city_t *city_array, short int *cc, char **curl_buf, size_t *
 
     struct http_membuf_t chunk = {0};
 
-    curl_easy_setopt(curl, CURLOPT_URL, city_array[*cc].city_url);
+    curl_easy_setopt(curl, CURLOPT_URL, city_array[*user_choice].city_url);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_data); 
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&chunk); /* This is chunk in http_write_data */
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L); /* Follow redirects */
@@ -67,11 +67,16 @@ int http_curl(parse_city_t *city_array, short int *cc, char **curl_buf, size_t *
     }
     
     curl_easy_cleanup(curl);
-    /* Reset City Counter in main */
-    *cc = 16;
+
 
     /* Return buffer of recived data and size of buffer */
     *curl_buf = chunk.data;
     *curl_buf_len = chunk.size;
     return EXIT_SUCCESS;
+}
+
+void http_free_and_clear(char **curl_buf, size_t *curl_buf_len) {
+    free(*curl_buf);
+    *curl_buf = NULL;
+    *curl_buf_len = 0;      
 }
