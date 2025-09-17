@@ -11,7 +11,10 @@
 
 int main() {
   City_t city_array[MAX_CITY_ARRAY];
-  parse_city_into_array(city_array, city_list);
+  if (parse_city_into_array(city_array, city_list) != 0){
+    printf("Failed to parse city string");
+    return EXIT_FAILURE;
+  }
 
   char input[32];
 
